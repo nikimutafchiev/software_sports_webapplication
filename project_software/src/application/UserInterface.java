@@ -1,9 +1,5 @@
 package application;
-class InvalidParameterException extends Exception{
-    InvalidParameterException(String message){
-        super(message);
-    }
-}
+
 public class UserInterface {
     private int num_games;
     private int num_players;
