@@ -20,8 +20,9 @@ public class UserInterface {
     public int startGame(int team1id, int team2id) throws InvalidParameterException{
         if(team1id< 0 || team1id>num_teams || team2id< 0 || team2id > num_teams)
             throw new InvalidParameterException("Invalid team id");
-        //TODO
         int generated_id = 0; //will return the id in the database
+        //TODO
+        num_games++;
         return generated_id;
     }
     public void endGame(int gameId, int score) throws InvalidParameterException{
@@ -32,13 +33,15 @@ public class UserInterface {
         //TODO
     }
     public int addTeam(String name, int[] players){
-        //TODO
         int generated_id = 0; //will return the id in the database
+        //TODO
+        num_teams++;
         return generated_id;
     }
     public int addPlayer(String name, int jerseyNumber){
-        //TODO
         int generated_id = 0; //will return the id in the database
+        //TODO
+        num_players++;
         return generated_id;
     }
     public void addPlayerToTeam(int playerId, int teamId) throws InvalidParameterException{
