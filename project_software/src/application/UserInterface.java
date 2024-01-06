@@ -20,35 +20,33 @@ public class UserInterface {
     public int startGame(int team1id, int team2id) throws InvalidParameterException{
         if(team1id< 0 || team1id>num_teams || team2id< 0 || team2id > num_teams)
             throw new InvalidParameterException("Invalid team id");
-        int generated_id = 0; //will return the id in the database
-        //TODO
         num_games++;
-        return generated_id;
+        return Game.addGame(team1id,team2id);
     }
     public void endGame(int gameId, int score) throws InvalidParameterException{
         if(score < 0 )
             throw new InvalidParameterException("Invalid score");
         if(gameId < 0 || gameId > num_games)
             throw new InvalidParameterException("Invalid game id");
-        //TODO
+        Game.scoreGame(gameId, score);
     }
-    public int addTeam(String name, int[] players){
-        int generated_id = 0; //will return the id in the database
-        //TODO
+    public int addTeam(String name, String city, int[] players) throws InvalidParameterException{
         num_teams++;
-        return generated_id;
+        int team_id = Team.addTeam(name,city);
+        for(int player_id:players){
+            addPlayerToTeam(player_id,team_id);
+        }
+        return team_id;
     }
     public int addPlayer(String name, int jerseyNumber){
-        int generated_id = 0; //will return the id in the database
-        //TODO
         num_players++;
-        return generated_id;
+        return Player.addPlayer(name,jerseyNumber);
     }
     public void addPlayerToTeam(int playerId, int teamId) throws InvalidParameterException{
         if(playerId< 0 || playerId > num_players)
             throw new InvalidParameterException("Invalid player id");
-        if (teamId< 0 || teamId > num_teams)
+        if(teamId< 0 || teamId > num_teams)
             throw new InvalidParameterException("Invalid team id");
-        //TODO
+        Team.addPlayer(playerId, teamId);
     }
 }
