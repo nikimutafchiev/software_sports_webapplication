@@ -13,8 +13,10 @@ public class UserInterface {
     }
 
     public static UserInterface getSingleton_instance(){
-        if(singleton_instance == null)
+        if(singleton_instance == null) {
             singleton_instance = new UserInterface();
+            System.out.println("Interface created successfully");
+        }
         return singleton_instance;
     }
     public int startGame(int team1id, int team2id) throws InvalidParameterException{
