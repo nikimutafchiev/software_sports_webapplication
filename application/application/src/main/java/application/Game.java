@@ -3,7 +3,6 @@ package application;
 class Game {
     int id;
     boolean status;
-    int score;
     static int addGame(int team1id, int team2id){
 
         //TODO

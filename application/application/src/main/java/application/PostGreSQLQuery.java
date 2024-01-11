@@ -1,6 +1,6 @@
 package application;
 
-class MySQLQuery {
+class PostGreSQLQuery {
 
     static int insert(String table, String[]data){
         return 1;
