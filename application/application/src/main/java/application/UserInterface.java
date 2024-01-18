@@ -18,28 +18,37 @@ public class UserInterface {
             throw new InvalidParameterException("Invalid team id");
         return Game.addGame(team1id,team2id);
     }
-    public void endGame(int gameId, int score) throws InvalidParameterException{
-        if(score < 0 )
+    public void endGame(int team1_id, int team2_id,int gameId, int score1,int score2) throws InvalidParameterException{
+        if(score1 < 0 || score2 < 0)
             throw new InvalidParameterException("Invalid score");
         if(gameId < 0)
             throw new InvalidParameterException("Invalid game id");
-        Game.scoreGame(gameId, score);
+        if(team1_id < 0 || team2_id < 0)
+            throw new InvalidParameterException("Invalid team id");
+        Game.scoreGame(team1_id,gameId, score1);
+        Game.scoreGame(team2_id,gameId, score2);
     }
     public int addTeam(String name, String city, int[] players) throws InvalidParameterException{
         int team_id = Team.addTeam(name,city);
         for(int player_id:players){
-            addPlayerToTeam(player_id,team_id);
+            transferPlayerToTeam(player_id,team_id);
         }
         return 0;
     }
     public int addPlayer(String name, int jerseyNumber, int team_id){
         return Player.addPlayer(name,jerseyNumber,team_id);
     }
-    public void addPlayerToTeam(int playerId, int teamId) throws InvalidParameterException{
+    public void transferPlayerToTeam(int playerId, int teamId) throws InvalidParameterException{
         if(playerId < 0 )
             throw new InvalidParameterException("Invalid player id");
         if(teamId < 0)
             throw new InvalidParameterException("Invalid team id");
         Player.updatePlayer(playerId, teamId);
+    }
+
+    public void deleteAllData(){
+        Player.emptyPlayers();
+        Team.emptyTeams();
+        Game.emptyGames();
     }
 }

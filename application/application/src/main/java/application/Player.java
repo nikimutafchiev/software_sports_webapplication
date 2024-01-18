@@ -8,4 +8,7 @@ abstract class Player {
     static void updatePlayer(int player_id, int team_id){
         PostGreSQLQuery.update("Player",new String[]{String.format("team_id = %d",team_id)},new String[]{String.format("id = %d",player_id)});
     }
+    static void emptyPlayers(){
+        PostGreSQLQuery.truncate("Player");
+    }
 }

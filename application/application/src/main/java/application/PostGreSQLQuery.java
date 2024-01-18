@@ -14,9 +14,9 @@ class PostGreSQLQuery {
             Statement stm = c.createStatement();
             stm.execute(String.format("INSERT INTO %s(%s) VALUES (%s)",table,String.join(",",fields),String.join(",",data)));
             ResultSet rs = stm.executeQuery(String.format("SELECT id FROM %s ORDER BY id DESC LIMIT 1",table));
-            int a =0;
-            a++;
+            rs.next();
             c.close();
+            return rs.getInt("id");
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -51,7 +51,7 @@ class PostGreSQLQuery {
         try {
             c = DriverManager.getConnection("jdbc:postgresql://localhost/sports", "postgres", "root");
             Statement stm = c.createStatement();
-            stm.execute(String.format("UPDATE %s SET %s WHERE %s",table,String.join(",",set_fields),String.join(",",conditions)));
+            stm.execute(String.format("UPDATE %s SET %s WHERE %s",table,String.join(",",set_fields),String.join(" and ",conditions)));
             c.close();
         }catch(Exception e){
             e.printStackTrace();
@@ -62,7 +62,7 @@ class PostGreSQLQuery {
         try {
             c = DriverManager.getConnection("jdbc:postgresql://localhost/sports", "postgres", "root");
             Statement stm = c.createStatement();
-            stm.execute(String.format("TRUNCATE TABLE %s",table));
+            stm.execute(String.format("TRUNCATE TABLE %s RESTART IDENTITY CASCADE",table));
             c.close();
         }catch(Exception e){
             e.printStackTrace();
