@@ -38,11 +38,11 @@ public class UserInterface {
         for(int player_id:players){
             addPlayerToTeam(player_id,team_id);
         }
-        return team_id;
+        return 0;
     }
-    public int addPlayer(String name, int jerseyNumber){
+    public int addPlayer(String name, int jerseyNumber, int team_id){
         num_players++;
-        return Player.addPlayer(name,jerseyNumber);
+        return Player.addPlayer(name,jerseyNumber,team_id);
     }
     public void addPlayerToTeam(int playerId, int teamId) throws InvalidParameterException{
         if(playerId< 0 || playerId > num_players)
