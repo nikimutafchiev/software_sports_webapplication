@@ -1,15 +1,10 @@
 package application;
 
 abstract class Team {
-    int id;
-    String name;
-    String city;
     static int addTeam(String name, String city){
-        //TODO
-        //will return the id in the database
-        return 0;
+       return PostGreSQLQuery.insert("Team",new String[]{"name","city"},new String[]{String.format("'%s'",name),String.format("'%s'",city)});
     }
-    static void addPlayer(int playerId, int teamId){
-        //TODO
+    static void emptyTeams(){
+        PostGreSQLQuery.truncate("Team");
     }
 }
