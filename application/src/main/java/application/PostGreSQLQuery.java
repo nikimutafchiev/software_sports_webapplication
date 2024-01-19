@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-class PostGreSQLQuery {
+public class PostGreSQLQuery {
 
     static int insert(String table, String[] fields, String[]data){
         Connection c;
@@ -69,7 +69,7 @@ class PostGreSQLQuery {
         }
         return null;
     }
-    static void delete(String table, String[] conditions){
+    public static void delete(String table, String[] conditions){
         Connection c;
         try {
             c = DriverManager.getConnection("jdbc:postgresql://localhost/sports", "postgres", "root");

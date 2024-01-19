@@ -13,6 +13,9 @@ abstract class Player {
     }
     static void viewAllPlayers(){
         String[] res = PostGreSQLQuery.select_left_join("Player",new String[]{"Team"},new String[]{"Team.id = Player.team_id"},new String[]{"Player.name","Player.jersey_number", "Team.name", "Team.city"}, new String[]{"true"});
+        if(res == null){
+            throw new NullPointerException();
+        }
         for(String row: res){
             System.out.println(row);
         }
