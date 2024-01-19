@@ -18,7 +18,7 @@ class PostGreSQLQuery {
             c.close();
             return rs.getInt("id");
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return -1;
     }
@@ -31,7 +31,7 @@ class PostGreSQLQuery {
 
             c.close();
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return null;
     }
@@ -43,7 +43,7 @@ class PostGreSQLQuery {
             stm.execute(String.format("DELETE FROM %s WHERE %s",table,String.join(",",conditions)));
             c.close();
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
     static void update(String table, String[] set_fields, String[] conditions){
@@ -54,7 +54,7 @@ class PostGreSQLQuery {
             stm.execute(String.format("UPDATE %s SET %s WHERE %s",table,String.join(",",set_fields),String.join(" and ",conditions)));
             c.close();
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
     static void truncate(String table){
@@ -65,7 +65,7 @@ class PostGreSQLQuery {
             stm.execute(String.format("TRUNCATE TABLE %s RESTART IDENTITY CASCADE",table));
             c.close();
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }
