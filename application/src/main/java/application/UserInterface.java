@@ -51,6 +51,10 @@ public class UserInterface {
     public void viewAllPlayers(){
         Player.viewAllPlayers();
     }
+
+    public void viewAllGamesByTeam(int team_id){
+        Game.viewAllGamesByTeam(team_id);
+    }
     public void deleteAllData(){
         Player.emptyPlayers();
         Team.emptyTeams();

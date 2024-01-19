@@ -14,10 +14,13 @@ public class Main {
             console.addPlayer("Simeon",56,1);
             console.addPlayer("Boris",78,1);
             console.addTeam("Litex","Sofia",new int[]{1,3});
+            console.startGame(2,1);
             console.startGame(1,2);
             console.endGame(1,2,1,2,3);
+            console.endGame(1,2,2,4,17);
             console.viewAllTeams();
             console.viewAllPlayers();
+            console.viewAllGamesByTeam(1);
 
         }catch(Exception e){
             System.out.println(e.getMessage());

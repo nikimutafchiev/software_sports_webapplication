@@ -42,14 +42,16 @@ class PostGreSQLQuery {
         }
         return null;
     }
-    static String[] select_left_join(String table, String[] left_joins, String[] fields, String[] conditions){
+    static String[] select_left_join(String table, String[] left_joins, String[] ons,String[] fields, String[] conditions){
         Connection c;
         try {
             c = DriverManager.getConnection("jdbc:postgresql://localhost/sports", "postgres", "root");
             Statement stm = c.createStatement();
             StringBuilder statement = new StringBuilder(String.format("SELECT %s FROM %s ",String.join(",",fields),table));
+            int on_index = 0;
             for(String conn: left_joins){
-                statement.append(String.format("LEFT JOIN %1$s ON %2$s.%1$s_id = %1$s.id ",conn,table));
+                statement.append(String.format("LEFT JOIN %s ON %s ",conn,ons[on_index]));
+                on_index++;
             }
             statement.append(String.format("WHERE %s",String.join(" and ",conditions)));
             ResultSet rs = stm.executeQuery(statement.toString());
