@@ -48,6 +48,9 @@ public class UserInterface {
     public void viewAllTeams(){
         Team.viewAllTeams();
     }
+    public void viewAllPlayers(){
+        Player.viewAllPlayers();
+    }
     public void deleteAllData(){
         Player.emptyPlayers();
         Team.emptyTeams();

@@ -9,7 +9,7 @@ abstract class Team {
     }
 
     static void viewAllTeams(){
-        String [] res = PostGreSQLQuery.select("Team",new String[]{"name","city"},new String[]{"true"});
+        String [] res = PostGreSQLQuery.select("Team",new String[]{"id","name","city"},new String[]{"true"});
         for(String row: res){
             System.out.println(row);
         }

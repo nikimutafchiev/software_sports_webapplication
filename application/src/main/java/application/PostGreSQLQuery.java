@@ -30,8 +30,33 @@ class PostGreSQLQuery {
             ResultSet rs = stm.executeQuery(String.format("SELECT %s FROM %s WHERE %s",String.join(",",fields),table,String.join(",",conditions)));
             StringBuilder res = new StringBuilder();
             while(rs.next()){
-                for(String field:fields){
-                    res.append(rs.getString(field)).append(" ");
+                for(int i=1;i<fields.length+1;i++){
+                    res.append(rs.getString(i)).append(" ");
+                }
+                res.append(";");
+            }
+            c.close();
+            return res.toString().split(";");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    static String[] select_left_join(String table, String[] left_joins, String[] fields, String[] conditions){
+        Connection c;
+        try {
+            c = DriverManager.getConnection("jdbc:postgresql://localhost/sports", "postgres", "root");
+            Statement stm = c.createStatement();
+            StringBuilder statement = new StringBuilder(String.format("SELECT %s FROM %s ",String.join(",",fields),table));
+            for(String conn: left_joins){
+                statement.append(String.format("LEFT JOIN %1$s ON %2$s.%1$s_id = %1$s.id ",conn,table));
+            }
+            statement.append(String.format("WHERE %s",String.join(" and ",conditions)));
+            ResultSet rs = stm.executeQuery(statement.toString());
+            StringBuilder res = new StringBuilder();
+            while(rs.next()){
+                for(int i=1;i<fields.length+1;i++){
+                    res.append(rs.getString(i)).append(" ");
                 }
                 res.append(";");
             }

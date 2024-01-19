@@ -14,4 +14,6 @@ class Game {
     static void emptyGames(){
         PostGreSQLQuery.truncate("Game");
     }
+
+
 }

@@ -17,6 +17,7 @@ public class Main {
             console.startGame(1,2);
             console.endGame(1,2,1,2,3);
             console.viewAllTeams();
+            console.viewAllPlayers();
 
         }catch(Exception e){
             System.out.println(e.getMessage());
