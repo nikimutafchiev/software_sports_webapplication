@@ -15,8 +15,9 @@ class Game {
         PostGreSQLQuery.truncate("Game");
     }
 
-    static void viewAllGamesByTeam(int team_id){
-        String[] res = PostGreSQLQuery.select_left_join("Game",new String[]{"TeamGame","Team"},new String[]{"Game.id = TeamGame.game_id","Team.id = TeamGame.team_id"},new String[]{"Game.id","Team.name", "Team.city","TeamGame.Score"}, new String[]{String.format("Team.id = %s",team_id)});
+    static void viewAllGames(){
+        String[] res = PostGreSQLQuery.select_left_join("Game",new String[]{"TeamGame","Team"},new String[]{"Game.id = TeamGame.game_id","Team.id = TeamGame.team_id"},new String[]{"Game.id","Team.name", "Team.city","TeamGame.score"}, new String[]{"true"});
+        assert res != null;
         for(String row: res) {
             System.out.println(row);
         }

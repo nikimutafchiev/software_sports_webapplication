@@ -33,7 +33,7 @@ public class UserInterface {
         for(int player_id:players){
             transferPlayerToTeam(player_id,team_id);
         }
-        return 0;
+        return team_id;
     }
     public int addPlayer(String name, int jerseyNumber, int team_id){
         return Player.addPlayer(name,jerseyNumber,team_id);
@@ -52,8 +52,8 @@ public class UserInterface {
         Player.viewAllPlayers();
     }
 
-    public void viewAllGamesByTeam(int team_id){
-        Game.viewAllGamesByTeam(team_id);
+    public void viewAllGames(){
+        Game.viewAllGames();
     }
     public void deleteAllData(){
         Player.emptyPlayers();
