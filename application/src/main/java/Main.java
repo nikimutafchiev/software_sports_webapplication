@@ -13,7 +13,7 @@ public class Main {
             console.addPlayer("Georgi",45,1);
             console.addPlayer("Simeon",56,1);
             console.addPlayer("Boris",78,1);
-            console.addTeam("CSKA","Sofia",new int[]{1,3});
+            console.addTeam("Litex","Sofia",new int[]{1,3});
             console.startGame(1,2);
             console.endGame(1,2,1,2,3);
 
