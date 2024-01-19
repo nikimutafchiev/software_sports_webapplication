@@ -28,8 +28,15 @@ class PostGreSQLQuery {
             c = DriverManager.getConnection("jdbc:postgresql://localhost/sports", "postgres", "root");
             Statement stm = c.createStatement();
             ResultSet rs = stm.executeQuery(String.format("SELECT %s FROM %s WHERE %s",String.join(",",fields),table,String.join(",",conditions)));
-
+            StringBuilder res = new StringBuilder();
+            while(rs.next()){
+                for(String field:fields){
+                    res.append(rs.getString(field)).append(" ");
+                }
+                res.append(";");
+            }
             c.close();
+            return res.toString().split(";");
         }catch(Exception e){
             System.out.println(e.getMessage());
         }

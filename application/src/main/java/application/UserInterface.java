@@ -45,7 +45,9 @@ public class UserInterface {
             throw new InvalidParameterException("Invalid team id");
         Player.updatePlayer(playerId, teamId);
     }
-
+    public void viewAllTeams(){
+        Team.viewAllTeams();
+    }
     public void deleteAllData(){
         Player.emptyPlayers();
         Team.emptyTeams();

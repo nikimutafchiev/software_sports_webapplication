@@ -7,7 +7,7 @@ public class Main {
         UserInterface console = UserInterface.getSingleton_instance();
         try {
             console.deleteAllData();
-            console.addTeam("Levski","Sofia",new int[]{});
+            console.addTeam("Botev","Plovdiv",new int[]{});
             console.addPlayer("Ivan",12,1);
             console.addPlayer("Petar",23,1);
             console.addPlayer("Georgi",45,1);
@@ -16,7 +16,7 @@ public class Main {
             console.addTeam("Litex","Sofia",new int[]{1,3});
             console.startGame(1,2);
             console.endGame(1,2,1,2,3);
-
+            console.viewAllTeams();
 
         }catch(Exception e){
             System.out.println(e.getMessage());
