@@ -14,4 +14,14 @@ class Game {
     static void emptyGames(){
         PostGreSQLQuery.truncate("Game");
     }
+
+    static void viewAllGames(){
+        String[] res = PostGreSQLQuery.select_left_join("Game",new String[]{"TeamGame","Team"},new String[]{"Game.id = TeamGame.game_id","Team.id = TeamGame.team_id"},new String[]{"Game.id","Team.name", "Team.city","TeamGame.score"}, new String[]{"true"});
+        if(res == null){
+            throw new NullPointerException();
+        }
+        for(String row: res) {
+            System.out.println(row);
+        }
+    }
 }

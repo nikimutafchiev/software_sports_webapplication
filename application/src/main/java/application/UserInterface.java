@@ -33,7 +33,7 @@ public class UserInterface {
         for(int player_id:players){
             transferPlayerToTeam(player_id,team_id);
         }
-        return 0;
+        return team_id;
     }
     public int addPlayer(String name, int jerseyNumber, int team_id){
         return Player.addPlayer(name,jerseyNumber,team_id);
@@ -45,7 +45,16 @@ public class UserInterface {
             throw new InvalidParameterException("Invalid team id");
         Player.updatePlayer(playerId, teamId);
     }
+    public void viewAllTeams(){
+        Team.viewAllTeams();
+    }
+    public void viewAllPlayers(){
+        Player.viewAllPlayers();
+    }
 
+    public void viewAllGames(){
+        Game.viewAllGames();
+    }
     public void deleteAllData(){
         Player.emptyPlayers();
         Team.emptyTeams();

@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-class PostGreSQLQuery {
+public class PostGreSQLQuery {
 
     static int insert(String table, String[] fields, String[]data){
         Connection c;
@@ -18,7 +18,7 @@ class PostGreSQLQuery {
             c.close();
             return rs.getInt("id");
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return -1;
     }
@@ -28,14 +28,48 @@ class PostGreSQLQuery {
             c = DriverManager.getConnection("jdbc:postgresql://localhost/sports", "postgres", "root");
             Statement stm = c.createStatement();
             ResultSet rs = stm.executeQuery(String.format("SELECT %s FROM %s WHERE %s",String.join(",",fields),table,String.join(",",conditions)));
-
+            StringBuilder res = new StringBuilder();
+            while(rs.next()){
+                for(int i=1;i<fields.length+1;i++){
+                    res.append(rs.getString(i)).append(" ");
+                }
+                res.append(";");
+            }
             c.close();
+            return res.toString().split(";");
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return null;
     }
-    static void delete(String table, String[] conditions){
+    static String[] select_left_join(String table, String[] left_joins, String[] ons,String[] fields, String[] conditions){
+        Connection c;
+        try {
+            c = DriverManager.getConnection("jdbc:postgresql://localhost/sports", "postgres", "root");
+            Statement stm = c.createStatement();
+            StringBuilder statement = new StringBuilder(String.format("SELECT %s FROM %s ",String.join(",",fields),table));
+            int on_index = 0;
+            for(String conn: left_joins){
+                statement.append(String.format("LEFT JOIN %s ON %s ",conn,ons[on_index]));
+                on_index++;
+            }
+            statement.append(String.format("WHERE %s",String.join(" and ",conditions)));
+            ResultSet rs = stm.executeQuery(statement.toString());
+            StringBuilder res = new StringBuilder();
+            while(rs.next()){
+                for(int i=1;i<fields.length+1;i++){
+                    res.append(rs.getString(i)).append(" ");
+                }
+                res.append(";");
+            }
+            c.close();
+            return res.toString().split(";");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    public static void delete(String table, String[] conditions){
         Connection c;
         try {
             c = DriverManager.getConnection("jdbc:postgresql://localhost/sports", "postgres", "root");
@@ -43,7 +77,7 @@ class PostGreSQLQuery {
             stm.execute(String.format("DELETE FROM %s WHERE %s",table,String.join(",",conditions)));
             c.close();
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
     static void update(String table, String[] set_fields, String[] conditions){
@@ -54,7 +88,7 @@ class PostGreSQLQuery {
             stm.execute(String.format("UPDATE %s SET %s WHERE %s",table,String.join(",",set_fields),String.join(" and ",conditions)));
             c.close();
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
     static void truncate(String table){
@@ -65,7 +99,7 @@ class PostGreSQLQuery {
             stm.execute(String.format("TRUNCATE TABLE %s RESTART IDENTITY CASCADE",table));
             c.close();
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }

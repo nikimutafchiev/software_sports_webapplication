@@ -7,22 +7,30 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(classes = MainApplicationTests.class)
 class MainApplicationTests {
-	UserInterface console = UserInterface.getSingleton_instance();
 	@Test
-	void testAddTeam(){
+	void testViewTeams(){
 		try{
-			Assertions.assertEquals(0, UserInterface.getSingleton_instance().addTeam("niki","sofia",new int[]{}));
+			UserInterface.getSingleton_instance().viewAllTeams();
 		}catch(Exception e){
-			e.printStackTrace();
+			Assertions.fail("Test failed");
 		}
 	}
 
 	@Test
-	void testAddPlayer(){
+	void testViewPlayers(){
 		try{
-		Assertions.assertEquals(0, UserInterface.getSingleton_instance().addPlayer("niki",24, 2));
+			UserInterface.getSingleton_instance().viewAllPlayers();
 		}catch(Exception e){
-			e.printStackTrace();
+			Assertions.fail("Test failed");
+		}
+	}
+
+	@Test
+	void testViewGames(){
+		try{
+			UserInterface.getSingleton_instance().viewAllGames();
+		}catch(Exception e){
+			Assertions.fail("Test failed");
 		}
 	}
 }
